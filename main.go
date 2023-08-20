@@ -1,24 +1,24 @@
 package main
 
 import (
-    "fmt"
-    "log"
-    "net/http"
-    "strconv"
+	"fmt"
+	"log"
+	"net/http"
+	"strconv"
 )
 
+var number int = 0
 
 func handler(w http.ResponseWriter, r *http.Request) {
-    number := 0
-    number++
-    fmt.Fprintf(w, "Welcome to go http " + strconv.Itoa(number) + "\n")
+	number++
+	fmt.Fprintf(w, "Welcome to go http "+strconv.Itoa(number)+"\n")
 }
 
 func main() {
 
+	http.HandleFunc("/", handler)
 
-    http.HandleFunc("/", handler)
-
-    log.Fatal(http.ListenAndServe(":80", nil))
+	fmt.Println("Server is listening...")
+	log.Fatal(http.ListenAndServe(":80", nil))
 
 }
